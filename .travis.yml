@@ -6,7 +6,9 @@ php:
 - 7.0
 
 env:
-- TYPO3_VERSION="^7.6"
+  matrix:
+  - TYPO3_VERSION="^7.6"
+  - TYPO3_VERSION="^8.7"
 
 matrix:
   exclude:
@@ -20,9 +22,10 @@ before_install:
 - phpenv config-rm xdebug.ini
 
 install:
-- composer require-typo3-version "$TYPO3_VERSION"
-- git checkout .
-- export TYPO3_PATH_ROOT=$PWD/.Build/public
+- >
+  composer require-typo3-version "$TYPO3_VERSION";
+- >
+  git checkout .;
 
 script:
 - >
